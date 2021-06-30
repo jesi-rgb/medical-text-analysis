@@ -96,9 +96,9 @@ def _get_session():
 
 
 @st.cache
-@dataclass(frozen=True)
 class GeneratedComment:
-    comment_list: list[str] = field(default_factory=list)
+    def __init__(self, comments):
+        self.comment_list = comments
 
     def __getitem__(self, item):
         return self.comment_list[item]
