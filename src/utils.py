@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
+from genericpath import exists
 from io import StringIO
 from collections import Counter
 
+import os
 import re
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -16,6 +18,42 @@ import streamlit as st
 from streamlit.hashing import _CodeHasher
 from streamlit.report_thread import get_report_ctx
 from streamlit.server.server import Server
+
+import requests
+
+MODEL_ID_GD = "1KGYphUBa8CttAAdt88GfXRYxYn-J5Kqm"
+
+
+def download_file_from_google_drive(id, destination):
+    URL = "https://docs.google.com/uc?export=download"
+
+    session = requests.Session()
+
+    response = session.get(URL, params={"id": id}, stream=True)
+    token = get_confirm_token(response)
+
+    if token:
+        params = {"id": id, "confirm": token}
+        response = session.get(URL, params=params, stream=True)
+
+    save_response_content(response, destination)
+
+
+def get_confirm_token(response):
+    for key, value in response.cookies.items():
+        if key.startswith("download_warning"):
+            return value
+
+    return None
+
+
+def save_response_content(response, destination):
+    CHUNK_SIZE = 32768
+
+    with open(destination, "wb") as f:
+        for chunk in response.iter_content(CHUNK_SIZE):
+            if chunk:  # filter out keep-alive new chunks
+                f.write(chunk)
 
 
 class _SessionState:
@@ -111,9 +149,17 @@ def normalize(n, n_min=0, n_max=1):
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def load_model():
     model = GPT2LMHeadModel.from_pretrained("gpt2")
-    model.load_state_dict(
-        torch.load("trained_models/medtext-final.pt", map_location=torch.device("cpu"))
-    )
+
+    if exists("trained_models/medtext-final.pt"):
+        model.load_state_dict(
+            torch.load(
+                "trained_models/medtext-final.pt", map_location=torch.device("cpu")
+            )
+        )
+    else:
+        os.mkdir("trained_models")
+        download_file_from_google_drive(MODEL_ID_GD, "trained_models")
+
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
     return model, tokenizer
