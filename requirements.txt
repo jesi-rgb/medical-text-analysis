@@ -1,9 +1,9 @@
-torch==1.7.1
-streamlit==0.83.0
-spacy==3.0.6
-colour==0.1.5
-pandas==1.2.1
-spacy-transformers==1.0.3
+torch
+streamlit
+spacy
+colour
+pandas
+spacy-transformers
 dataclasses
 scispacy
 medspacy
