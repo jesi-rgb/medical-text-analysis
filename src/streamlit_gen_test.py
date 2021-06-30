@@ -1,8 +1,6 @@
+#!/usr/bin/python3
 import streamlit as st
-import matplotlib.pyplot as plt
-
 from utils import *
-
 from utils import _get_state
 
 
@@ -15,21 +13,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="auto",
 )
-
-
-# configuration for the matplots
-size = 15
-params = {
-    "legend.fontsize": "large",
-    "figure.figsize": (20, 10),
-    "axes.labelsize": 25,
-    "axes.titlesize": 25,
-    "xtick.labelsize": 10,
-    "ytick.labelsize": 10,
-    "axes.titlepad": 25,
-}
-plt.rcParams["font.sans-serif"] = ["Avenir", "sans-serif"]
-plt.rcParams.update(params)
 
 
 st.title("**MEDTEXT**: Análisis de texto médico")

@@ -23,6 +23,20 @@ import requests
 
 MODEL_ID_GD = "1KGYphUBa8CttAAdt88GfXRYxYn-J5Kqm"
 
+# configuration for the matplots
+size = 15
+params = {
+    "legend.fontsize": "large",
+    "figure.figsize": (20, 10),
+    "axes.labelsize": 25,
+    "axes.titlesize": 25,
+    "xtick.labelsize": 10,
+    "ytick.labelsize": 10,
+    "axes.titlepad": 25,
+}
+plt.rcParams["font.sans-serif"] = ["Avenir", "sans-serif"]
+plt.rcParams.update(params)
+
 
 def download_file_from_google_drive(id, destination):
     print("Downloading model from google drive...")
