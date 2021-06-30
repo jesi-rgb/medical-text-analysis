@@ -128,9 +128,7 @@ def comment_generation(state):
         progress_text.empty()
         coms.empty()
 
-        generated_comments = [
-            l.removeprefix("<|BOS|>").rstrip("<|EOS|>\n") for l in generated_comments
-        ]
+        generated_comments = [l[7:].rstrip("<|EOS|>\n") for l in generated_comments]
 
         state.generated_comments = generated_comments
 
