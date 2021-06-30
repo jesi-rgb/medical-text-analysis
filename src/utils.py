@@ -25,6 +25,7 @@ MODEL_ID_GD = "1KGYphUBa8CttAAdt88GfXRYxYn-J5Kqm"
 
 
 def download_file_from_google_drive(id, destination):
+    print("Downloading model from google drive...")
     URL = "https://docs.google.com/uc?export=download"
 
     session = requests.Session()
