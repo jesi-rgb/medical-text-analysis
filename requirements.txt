@@ -4,7 +4,7 @@ streamlit==0.83.0
 spacy==3.0.6
 colour==0.1.5
 pandas==1.2.1
-https://github.com/huggingface/transformers
+transformers
 dataclasses==0.8
 scispacy==0.4.0
 https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_bionlp13cg_md-0.4.0.tar.gz
