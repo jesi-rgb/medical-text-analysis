@@ -13,7 +13,7 @@ st.set_page_config(
     page_title="MEDTEXT NLP",
     page_icon="💭",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
 )
 
 
@@ -32,20 +32,68 @@ plt.rcParams["font.sans-serif"] = ["Avenir", "sans-serif"]
 plt.rcParams.update(params)
 
 
-st.title("Análisis de texto médico")
+st.title("**MEDTEXT**: Análisis de texto médico")
 st.subheader(
-    "Este proyecto tiene como objetivo extraer y mostrar información útil encontrada en los comentarios médicos."
+    "MEDTEXT tiene como objetivo extraer y mostrar información útil encontrada en los comentarios médicos."
 )
-st.write(
-    "En la columna de la izquierda podemos generar comentarios *de mentira*, debido a la carencia de bases de datos públicas que hay."
-)
-st.write(
-    "En la de la derecha, podemos analizar dichos comentarios, o aquellos de los que dispongamos nosotros."
-)
+
 col1, col2 = st.beta_columns((1, 3))
 
 
 ######################################## PAGE DEFINITION ##########################################
+
+
+def sidebar():
+    st.sidebar.header("Más info...")
+
+    st.sidebar.subheader("Generación de comentarios")
+    st.sidebar.markdown(
+        justify_text(
+            "En la columna de la <b>izquierda</b> podemos generar comentarios <i>de mentira</i>, debido a la carencia de bases de datos públicas que hay."
+        ),
+        unsafe_allow_html=True,
+    )
+    st.sidebar.markdown(
+        justify_text(
+            "La generación de comentarios se hace mediante una red neuronal especializada en modelado del lenguaje: <b>GPT-2</b>. La red ha sido entrenada en un corpus de cerca de 30.000 comentarios médicos encontrados públicamente."
+        ),
+        unsafe_allow_html=True,
+    )
+    st.sidebar.markdown(
+        justify_text(
+            "La idea es poder tener un generador de texto <i>idealmente infinito</i>, para que los desarrolladores de herramientas de análisis de texto médico puedan desarrollar mejores aplicaciones de forma más fácil."
+        ),
+        unsafe_allow_html=True,
+    )
+
+    st.sidebar.markdown("---")
+
+    st.sidebar.subheader("Evaluación de comentarios")
+    st.sidebar.markdown(
+        justify_text(
+            "En la de la <b>derecha</b>, podemos analizar los comentarios generados, o aquellos de los que dispongamos nosotros."
+        ),
+        unsafe_allow_html=True,
+    )
+    st.sidebar.markdown(
+        justify_text(
+            "El análisis se lleva a cabo mediante el uso de herramientas de PLN especializadas en texto médico. Dichos modelos han sido entrenados para ser particularmente buenos con texto médico, aunque cada modelo está especializado en cosas diferentes."
+        ),
+        unsafe_allow_html=True,
+    )
+    st.sidebar.markdown(
+        justify_text(
+            "Parte de la idea del proyecto comprendía unificar todas estas herramientas en una, de forma que podamos disfrutar de los puntos fuertes de todas."
+        ),
+        unsafe_allow_html=True,
+    )
+
+    st.sidebar.markdown("---")
+
+    st.sidebar.header("Autores:")
+    st.sidebar.markdown("- **Jesús Enrique Rascón**")
+    st.sidebar.markdown("- **Rocío Romero Zaliz**")
+
 
 # GENERATION COLUMN
 def comment_generation(state):
@@ -201,6 +249,7 @@ def main():
         "Evaluation": comment_evaluation,
     }
 
+    sidebar()
     # Display the selected page with the session state
     with col1:
         pages["Generation"](state)
