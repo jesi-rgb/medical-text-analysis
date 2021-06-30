@@ -131,7 +131,7 @@ def comment_evaluation(state):
 
     selection = st.selectbox(
         "Elige el modelo a utilizar:",
-        ["en_core_med7_trf", "en_ner_bionlp13cg_md", "en_ner_bc5cdr_md"],
+        ["en_core_med7_lg", "en_ner_bionlp13cg_md", "en_ner_bc5cdr_md"],
         1,
     )
 
