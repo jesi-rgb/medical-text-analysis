@@ -150,16 +150,13 @@ def normalize(n, n_min=0, n_max=1):
 def load_model():
     model = GPT2LMHeadModel.from_pretrained("gpt2")
 
-    if exists("trained_models/medtext-final.pt"):
-        model.load_state_dict(
-            torch.load(
-                "trained_models/medtext-final.pt", map_location=torch.device("cpu")
-            )
-        )
-    else:
+    if not exists("trained_models/medtext-final.pt"):
         os.mkdir("trained_models")
-        download_file_from_google_drive(MODEL_ID_GD, "trained_models")
+        download_file_from_google_drive(MODEL_ID_GD, "trained_models/medtext-final.pt")
 
+    model.load_state_dict(
+        torch.load("trained_models/medtext-final.pt", map_location=torch.device("cpu"))
+    )
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
     return model, tokenizer
