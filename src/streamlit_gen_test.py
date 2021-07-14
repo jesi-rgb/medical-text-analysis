@@ -8,16 +8,16 @@ from utils import _get_state
 
 # configuration of the page
 st.set_page_config(
-    page_title="MEDTEXT NLP",
+    page_title="MEDGEN",
     page_icon="💭",
     layout="wide",
     initial_sidebar_state="auto",
 )
 
 
-st.title("**MEDTEXT**: Análisis de texto médico")
+st.title("**MEDGEN**: Análisis de texto médico")
 st.subheader(
-    "MEDTEXT tiene como objetivo extraer y mostrar información útil encontrada en los comentarios médicos."
+    "MEDGEN tiene como objetivo extraer y mostrar información útil encontrada en los comentarios médicos."
 )
 
 col1, col2 = st.beta_columns((1, 3))
